@@ -9,7 +9,35 @@ public class MapDemo {
 
 	public static void main(String[] args) {
 		//practise01();
-		practise02();
+		//practise02();
+		practise03();
+	}
+
+	/*
+	 * 計算一個字串中各有幾個字元
+	 */
+	private static void practise03() {
+		String  str = "aaabbbbccac";
+		Map<Character, Integer> map = new HashMap<>();
+		
+		for (int i = 0; i < str.length(); i++) {
+			Character c = str.charAt(i);
+			if(map.containsKey(c)) {
+				//如果有重複的字元，取出value將value+1
+				Integer value = map.get(c);
+				map.put(c, ++value);
+			}
+			else {
+				map.put(c, 1);
+			}
+		}
+		
+		//key保存在set裡面
+		Set<Character> set = map.keySet();
+		for (Character key : set) {
+			System.out.println("key=" + key + " : " + "value=" + map.get(key));
+		}
+		
 	}
 
 	/**
