@@ -12,6 +12,18 @@ public class RegexDemo {
 		 */
 		boolean b = phoneNumber.matches("09\\d{8}");
 		System.out.println(b);
+		
+		/*
+		 * 校驗電子郵件
+		 */
+		String email = "johannisber@gmail.com";
+		/*
+		 * 「\\w」代表任何[0—9A—Z_a—z]。多加一個"\"讓它脫逸
+		 * 「{1,}」代表至少1位
+		 * 「(\\.\\w{2,}){12}」代表後面的".com"至少出現一次最多兩次用"()"括起來
+		 */
+		b = email.matches("\\w{1,}@\\w{2,}(\\.\\w{2,}){1,2}");
+		System.out.println(b);
 	}
 
 }
