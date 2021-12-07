@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
-import com.example.demo.Entity.student;
+import com.example.demo.Entity.Student;
 import com.example.demo.Repository.StudentRepository;
 
 @SpringBootTest
@@ -16,11 +16,28 @@ class DemoApplicationTests {
 	StudentRepository studentRepository;
 	
 	@Test
-	void contextLoads() {
-		List<student> students = studentRepository.findAll();
-		for (student student : students) {
+	void contextLoads1() {
+		List<Student> students = studentRepository.findAll();
+		for (Student student : students) {
 			System.out.println(student);
 		}
+	}
+	
+	@Test
+	void contextLoads2() {
+		Student student = new Student();
+		student.setSname("林建璋");
+		student.setSage("20");
+		student.setSaddress("台南市");
+		student.setSpwd("123456");
+		studentRepository.save(student);
+	}
+	
+	@Test
+	void contextLoads3() {
+		String name = "林建璋";
+		Student student = studentRepository.selectByName(name);
+		System.out.println(student);
 	}
 
 }
