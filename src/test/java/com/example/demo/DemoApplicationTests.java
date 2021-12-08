@@ -39,5 +39,10 @@ class DemoApplicationTests {
 		Student student = studentRepository.selectByName(name);
 		System.out.println(student);
 	}
+	
+	@Test
+	void contextLoads4() {
+		System.out.println(studentRepository.count());
+	}
 
 }

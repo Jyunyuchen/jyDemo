@@ -6,16 +6,25 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.example.demo.domain.User;
+import com.example.demo.exception.StudentNotFoundException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 public class thymeleafController {
 
+	@GetMapping("/ex/{id}/{name}")
+    public void exception(
+    		@PathVariable(name = "id") int id, 
+    		@PathVariable(name = "name") String name) {
+		throw new StudentNotFoundException("測試自定義例外異常");
+	}
+	
 	
 	//多個相同名稱的參數封裝成陣列
 	@GetMapping("/hello5")
