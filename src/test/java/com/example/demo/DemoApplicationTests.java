@@ -8,6 +8,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.demo.Entity.Student;
 import com.example.demo.Repository.StudentRepository;
+import com.example.demo.specifications.StudentSpecifications;
 
 @SpringBootTest
 class DemoApplicationTests {
@@ -42,7 +43,7 @@ class DemoApplicationTests {
 	
 	@Test
 	void contextLoads4() {
-		System.out.println(studentRepository.count());
+		System.out.println(studentRepository.findAll(StudentSpecifications.getStudentByNameLike("%明%")));
 	}
 
 }
