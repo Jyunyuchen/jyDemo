@@ -46,7 +46,7 @@ class DemoApplicationTests {
 	@Test
 	void contextLoads4() {
 		//System.out.println(studentRepository.findAll(StudentSpecifications.getStudentByNameLike("%明%")));
-		System.out.println(studentRepository.findAll(StudentSpecifications.getStudentByNameLikeAndequal("%明%", "15")));
+		System.out.println(studentRepository.findAll(StudentSpecifications.getStudentByNameLikeAndequal("%明%", null)));
 				
 	}
 

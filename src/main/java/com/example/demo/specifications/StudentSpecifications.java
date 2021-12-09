@@ -11,24 +11,31 @@ import com.example.demo.Entity.Student;
 
 public class StudentSpecifications {
 	public static Specification<Student> getStudentByNameSpec(String name) {
-		  return new Specification<Student>() {
+		return new Specification<Student>() {
 			@Override
 			public Predicate toPredicate(Root<Student> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
 				Predicate equalPredicate = criteriaBuilder.equal(root.get("sname"), name);
-                return equalPredicate;
-			}//實做的方法
-		  };//new的物件
+				return equalPredicate;
+			}// 實做的方法
+		};// new的物件
 	}// 方法
-	
+
 	public static Specification<Student> getStudentByNameLikeAndequal(String likeName, String equalAge) {
-		  return new Specification<Student>() {
+		return new Specification<Student>() {
 			@Override
 			public Predicate toPredicate(Root<Student> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
+
+				Predicate likeEqualPredicate = null;
 				Predicate likePredicate = criteriaBuilder.like(root.get("sname"), likeName);
-				Predicate equalPredicate = criteriaBuilder.equal(root.get("sage"), equalAge);	
-				Predicate likeEqualPredicate = criteriaBuilder.and(likePredicate,equalPredicate);
-              return likeEqualPredicate;
-			}//實做的方法
-		  };//new的物件
+				if (equalAge != null) {
+					Predicate equalPredicate = criteriaBuilder.equal(root.get("sage"), equalAge);
+					likeEqualPredicate = criteriaBuilder.and(likePredicate, equalPredicate);
+				} else {
+					likeEqualPredicate = criteriaBuilder.and(likePredicate);
+				}
+
+				return likeEqualPredicate;
+			}// 實做的方法
+		};// new的物件
 	}// 方法
 }
