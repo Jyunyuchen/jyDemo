@@ -2,6 +2,7 @@ package com.example.demo;
 
 import java.util.List;
 
+import org.hibernate.annotations.Where;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -41,9 +42,12 @@ class DemoApplicationTests {
 		System.out.println(student);
 	}
 	
+	//調用JpaSpecificationExecutor
 	@Test
 	void contextLoads4() {
-		System.out.println(studentRepository.findAll(StudentSpecifications.getStudentByNameLike("%明%")));
+		//System.out.println(studentRepository.findAll(StudentSpecifications.getStudentByNameLike("%明%")));
+		System.out.println(studentRepository.findAll(StudentSpecifications.getStudentByNameLikeAndequal("%明%", "15")));
+				
 	}
 
 }

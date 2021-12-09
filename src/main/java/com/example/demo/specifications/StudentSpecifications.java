@@ -20,12 +20,14 @@ public class StudentSpecifications {
 		  };//new的物件
 	}// 方法
 	
-	public static Specification<Student> getStudentByNameLike(String name) {
+	public static Specification<Student> getStudentByNameLikeAndequal(String likeName, String equalAge) {
 		  return new Specification<Student>() {
 			@Override
 			public Predicate toPredicate(Root<Student> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-				Predicate equalPredicate = criteriaBuilder.like(root.get("sname"), name);
-              return equalPredicate;
+				Predicate likePredicate = criteriaBuilder.like(root.get("sname"), likeName);
+				Predicate equalPredicate = criteriaBuilder.equal(root.get("sage"), equalAge);	
+				Predicate likeEqualPredicate = criteriaBuilder.and(likePredicate,equalPredicate);
+              return likeEqualPredicate;
 			}//實做的方法
 		  };//new的物件
 	}// 方法
