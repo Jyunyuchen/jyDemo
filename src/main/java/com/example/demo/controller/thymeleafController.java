@@ -45,24 +45,24 @@ public class thymeleafController {
 	
 	//Spring Boot自帶JacksonHttpMessageConvertersConfiguration,
 	//可將物件以json形式返回
-	@GetMapping("/hello3")
+	/*@GetMapping("/hello3")
 	@ResponseBody
     public User hello3() {
 		ObjectMapper objectMapper = new ObjectMapper();
 		User user1 = new User("小明", 18);
 		return user1;
-	}
+	}*/
 	
 	//加入@ResponseBody告訴spring要回傳字串不是重定向視圖(頁面跳轉)
 	//使用ObjectMapper將物件轉成json字串
-	@GetMapping("/hello2")
+	/*@GetMapping("/hello2")
 	@ResponseBody
     public String hello2() throws JsonProcessingException {
 		ObjectMapper objectMapper = new ObjectMapper();
 		User user1 = new User("小明", 18);
 		String json = objectMapper.writeValueAsString(user1);
 		return json;
-	}
+	}*/
 	
 	//加入@ResponseBody告訴spring要回傳字串不是重定向視圖(頁面跳轉)
 	@GetMapping("/hello1")

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>在後端驗證輸入為空</title>
+</head>
+<body>
+<h1>在後端驗證輸入為空</h1>
+
+ <!-- 必須添加「th:object="${user}"」否則「fields.hasErrors('name')」會錯-->
+<form th:object="${user}" th:action="@{/login}" method="post">
+    <p>姓名：<input type="text" name="username"/>
+    </p>
+    <!-- 可以使用fields.hasErrors('name')，
+    了解是否name這個欄位有錯誤，利用errors="*{name}" 
+    errors="*{name}為@NotEmpty中的message="使用者名稱不能為空")-->
+    
+    <!--/*/
+    <div th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></div>
+    /*/-->
+     <div th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+    <p>密碼：<input type="password" name="password"/>
+    </p>
+    <p><button>提交</button>
+    </p>
+</form>
+
+</body>
+</html>
