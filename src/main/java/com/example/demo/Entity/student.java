@@ -11,6 +11,19 @@ import javax.persistence.Table;
 @Table(name = "student")
 public class Student {
 
+	public Student() {
+		
+	}
+
+	public Student(int sno, String sname, String sage) {
+		this.sno = sno;
+		this.sname = sname;
+		this.sage = sage;
+	}
+
+
+
+
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="sno")

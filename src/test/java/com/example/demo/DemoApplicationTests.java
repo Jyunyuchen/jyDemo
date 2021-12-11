@@ -49,5 +49,11 @@ class DemoApplicationTests {
 		System.out.println(studentRepository.findAll(StudentSpecifications.getStudentByNameLikeAndequal("%明%", null)));
 				
 	}
+	
+	//使用JPQL語法查詢特定的欄位
+	@Test
+	void contextLoads5() {
+		System.out.println(studentRepository.fineBySpecificColumns(1));
+	}
 
 }

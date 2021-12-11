@@ -22,5 +22,10 @@ public interface StudentRepository extends JpaRepository<Student, Integer>, JpaS
 	
 	boolean existsBySname(String sname);
 	
-	Student findBySno(int sno);
+	Student findOneBySno(int sno);
+	
+	//使用JPQL語法查詢特定的欄位
+	@Query("SELECT new Student(s.sno, s.sname, s.sage) FROM Student s WHERE s.sno = ?1")
+	List<Student> fineBySpecificColumns (int sno);
+	
 }
