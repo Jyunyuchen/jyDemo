@@ -5,10 +5,13 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Order;
+import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.util.StringUtils;
 
 import com.example.demo.Entity.Student;
 
@@ -21,19 +24,25 @@ public class StudentSpecifications {
 			public Predicate toPredicate(Root<Student> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
 				
 				List<Predicate> predicates = new ArrayList<>();
-				
-				if(age != null) {
-					Predicate equalPredicate = criteriaBuilder.equal(root.get("sage"), age);
+				Path<String> snameColumn = root.get("sname");
+				Path<String> sageColumn = root.get("sage");
+				if(!StringUtils.isEmpty(age)) {
+					Predicate equalPredicate = criteriaBuilder.equal(sageColumn, age);
 					predicates.add(equalPredicate);
 				}
 				
-				if(name != null) {
-					Predicate likePredicate = criteriaBuilder.like(root.get("sname"), name);
+				if(!StringUtils.isEmpty(name)) {
+					Predicate likePredicate = criteriaBuilder.like(snameColumn, name);
 					predicates.add(likePredicate);
 				}
 				
 				 Predicate[] p = predicates.toArray(new Predicate[predicates.size()]);
-				 Predicate likeEqualPredicate = criteriaBuilder.and(p);
+				 //Predicate likeEqualPredicate = criteriaBuilder.and(p);
+				 
+				 Predicate likeEqualPredicate = null;
+				 Order orderByAge = criteriaBuilder.desc(sageColumn);
+				 
+				 likeEqualPredicate = query.where(p).orderBy(orderByAge).getRestriction();
 				 
 				return likeEqualPredicate;
 			}// 實做的方法

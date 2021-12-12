@@ -60,7 +60,7 @@ class DemoApplicationTests {
 	@Test
 	void contextLoads6() {
 		//System.out.println(studentRepository.findAll(StudentSpecifications.getStudentByNameLike("%明%")));
-		System.out.println(studentRepository.findAll(StudentSpecifications.getStudentByName("%明%", "15")));
+		System.out.println(studentRepository.findAll(StudentSpecifications.getStudentByName("%明%", null)));
 				
 	}
 
