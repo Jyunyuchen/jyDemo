@@ -18,12 +18,20 @@ public class RecursiveFileDemo {
 //		System.out.println(dirName);
 		File rootDir = new File(dirName);
 		String[] names = rootDir.list();
+	
+		/*
+		 * 如果names的length等於0則表示遍歷到該層的最後了
+		 */
+		if(names != null && names.length == 0) {
+			System.out.println("沒有資料夾了");
+		}
 
 		/*
 		 * 如果null則表示已遍歷到最後了(沒有下一個資料夾了) 
 		 * 就從根路徑開始遍歷下一個資料夾
 		 */
 		if (names == null) {
+//			System.out.println("names is null, dirName==> " + dirName);
 			String nextDir = dirName.substring(dirName.lastIndexOf("\\"));
 			appendDir = BASE_PATH + nextDir;
 			rootDir = new File(appendDir);
