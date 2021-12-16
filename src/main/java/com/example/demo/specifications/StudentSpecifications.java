@@ -16,40 +16,56 @@ import org.springframework.util.StringUtils;
 import com.example.demo.Entity.Student;
 
 public class StudentSpecifications {
-	
-	@SuppressWarnings("serial")
-	public static Specification<Student> getStudentByName(String name,  String age) {
+
+	public static Specification<Student> getStudent(String name, String age, String address) {
 		return new Specification<Student>() {
 			@Override
 			public Predicate toPredicate(Root<Student> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
-				
+
 				List<Predicate> predicates = new ArrayList<>();
 				Path<String> snameColumn = root.get("sname");
 				Path<String> sageColumn = root.get("sage");
-				if(!StringUtils.isEmpty(age)) {
-					Predicate equalPredicate = criteriaBuilder.equal(sageColumn, age);
-					predicates.add(equalPredicate);
+				Path<String> saddressColumn = root.get("saddress");
+
+				Predicate equalAgePredicate = null;
+				Predicate likeNamePredicate = null;
+				Predicate equalAddressPredicate = null;
+
+				if (!StringUtils.isEmpty(name) && !StringUtils.isEmpty(age)) {
+					equalAgePredicate = criteriaBuilder.equal(sageColumn, age);
+					likeNamePredicate = criteriaBuilder.like(snameColumn, name);
+					Predicate orPredicat = criteriaBuilder.or(equalAgePredicate, likeNamePredicate);
+					predicates.add(orPredicat);
+				} else {
+					/*if (!StringUtils.isEmpty(age)) {
+						equalAgePredicate = criteriaBuilder.equal(sageColumn, age);
+						predicates.add(equalAgePredicate);
+					}
+
+					if (!StringUtils.isEmpty(name)) {
+						likeNamePredicate = criteriaBuilder.like(snameColumn, name);
+						predicates.add(likeNamePredicate);
+					}*/
 				}
-				
-				if(!StringUtils.isEmpty(name)) {
-					Predicate likePredicate = criteriaBuilder.like(snameColumn, name);
-					predicates.add(likePredicate);
+
+				if (!StringUtils.isEmpty(address)) {
+					equalAddressPredicate = criteriaBuilder.equal(saddressColumn, address);
+					predicates.add(equalAddressPredicate);
 				}
-				
-				 Predicate[] p = predicates.toArray(new Predicate[predicates.size()]);
-				 //Predicate likeEqualPredicate = criteriaBuilder.and(p);
-				 
-				 Predicate likeEqualPredicate = null;
-				 Order orderByAge = criteriaBuilder.desc(sageColumn);
-				 
-				 likeEqualPredicate = query.where(p).orderBy(orderByAge).getRestriction();
-				 
+
+				Predicate[] p = predicates.toArray(new Predicate[predicates.size()]);
+				// Predicate likeEqualPredicate = criteriaBuilder.and(p);
+
+				Predicate likeEqualPredicate = null;
+				Order orderByAge = criteriaBuilder.desc(sageColumn);
+
+				likeEqualPredicate = query.where(p).orderBy(orderByAge).getRestriction();
+
 				return likeEqualPredicate;
 			}// 實做的方法
 		};// new的物件
 	}// 方法
-	
-	
+
 	public static Specification<Student> getStudentByNameSpec(String name) {
 		return new Specification<Student>() {
 			@Override
