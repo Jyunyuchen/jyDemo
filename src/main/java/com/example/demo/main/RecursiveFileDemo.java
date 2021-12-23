@@ -23,7 +23,7 @@ public class RecursiveFileDemo {
 		 * 如果names的length等於0則表示遍歷到該層的最後了
 		 */
 		if(names != null && names.length == 0) {
-			System.out.println("沒有資料夾了");
+			System.out.println("===========沒有資料夾了===========");
 		}
 
 		/*
@@ -31,17 +31,19 @@ public class RecursiveFileDemo {
 		 * 就從根路徑開始遍歷下一個資料夾
 		 */
 		if (names == null) {
-//			System.out.println("names is null, dirName==> " + dirName);
-			String nextDir = dirName.substring(dirName.lastIndexOf("\\"));
-			appendDir = BASE_PATH + nextDir;
-			rootDir = new File(appendDir);
+			dirName = dirName.substring(dirName.lastIndexOf("\\"));
+			dirName = BASE_PATH + dirName;
+			System.out.println("names is null, dirName==> " + dirName);
+			rootDir = new File(dirName);
 			names = rootDir.list();
 		}
 
-		if (names != null) {
+		if (names != null && names.length > 0) {
+			System.out.println(dirName);
 			for (String name : names) {
-				System.out.println("name==> " + name);
+				System.out.println("資料夾==> " + name);
 				appendDir += "\\" + name;
+				System.out.println("==> " + appendDir);
 				recursiveFile(appendDir);
 			}
 		}
