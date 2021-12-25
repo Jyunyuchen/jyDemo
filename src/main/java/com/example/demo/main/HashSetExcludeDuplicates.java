@@ -40,6 +40,8 @@ class Person {
 	@Override
 	public boolean equals(Object obj) {
 		
+		System.out.println("equals");
+		
 		// 引用相等返回 true
 		if (this == obj)
 			return true;
