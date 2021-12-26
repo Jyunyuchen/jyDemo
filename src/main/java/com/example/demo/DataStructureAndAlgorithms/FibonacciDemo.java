@@ -11,19 +11,19 @@ public class FibonacciDemo {
 		}
 
 		long start = System.currentTimeMillis();
-		System.out.println("開始時間:"+start);
-		System.out.println(fibonacciByMemory(memory.length - 1));
+		System.out.println("開始時間:" + start);
+		//System.out.println(fibonacciByMemory(memory.length - 1));
 		//System.out.println(fibonacci(50));
+		System.out.println(fibonacciWithForLoop(50));
 		long end = System.currentTimeMillis();
-		System.out.println("結束時間:"+end);
+		System.out.println("結束時間:" + end);
 		String result = String.valueOf(end - start);
 		System.out.printf("執行了 %s 毫秒", result);
-		
-		System.out.println();
-		for (int i = 0; i < memory.length; i++) {
-			System.out.printf("memory[%d]=%d",i,memory[i]);
-			System.out.println();
-		}
+
+		/*
+		 * System.out.println(); for (int i = 0; i < memory.length; i++) {
+		 * System.out.printf("memory[%d]=%d", i, memory[i]); System.out.println(); }
+		 */
 	}
 
 	/**
@@ -50,6 +50,47 @@ public class FibonacciDemo {
 			memory[n] = fibonacciByMemory(n - 1) + fibonacciByMemory(n - 2);
 
 		return memory[n];
+	}
 
+	/**
+	 * for loop 解 fibonacci
+	 * 
+	 * @param n
+	 * @return
+	 */
+	public static long fibonacciWithForLoop(int n) {
+
+		if (n == 0 || n == 1)
+			return n;
+		
+		long f1 = 0L;
+		long f2 = 0L;
+		long sum = 0L;
+		boolean flag = false;
+		for (int i = 0; i <= n; i++) {
+
+			if (i == 2) {
+				flag = false;
+			}
+
+			if (i == 0) {
+				f1 = i;
+				flag = true;
+			}
+
+			if (i == 1) {
+				f2 = i;
+				flag = true;
+			}
+
+			if (!flag) {
+				sum = f1 + f2;
+				f1 = f2;
+				f2 = sum;
+			}
+
+		}
+
+		return sum;
 	}
 }
