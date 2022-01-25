@@ -14,7 +14,7 @@ public class FibonacciDemo {
 		System.out.println("開始時間:" + start);
 		//System.out.println(fibonacciByMemory(memory.length - 1));
 		//System.out.println(fibonacci(50));
-		System.out.println(fibonacciWithForLoop(50));
+		System.out.println(fibonacciWithForLoop(2));
 		long end = System.currentTimeMillis();
 		System.out.println("結束時間:" + end);
 		String result = String.valueOf(end - start);

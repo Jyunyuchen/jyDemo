@@ -3,6 +3,17 @@ package com.example.demo.main;
 public class RegexDemo {
 
 	public static void main(String[] args) {
+		
+		//匹配數字
+		String num = "1";
+		//必須是個數字
+		//boolean b = num.matches("\\d+");
+		//必須是個數字且出現一次或多次
+		boolean b = num.matches("\\d+");
+		System.out.println(b);		
+		
+		
+		
 		//匹配電話號碼
 		String phoneNumber = "0819829156";
 		/*
@@ -11,7 +22,7 @@ public class RegexDemo {
 		 * 「\\d」===>\d為正則的語法表示數字匹配，多加一個"\"讓他脫逸
 		 * 「{8}」===>代表必須要有8位數
 		 */
-		boolean b = phoneNumber.matches("(09|08)\\d{8}");
+		b = phoneNumber.matches("(09|08)\\d{8}");
 		System.out.println(b);
 		
 		/*
