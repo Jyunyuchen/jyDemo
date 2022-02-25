@@ -28,4 +28,5 @@ public interface StudentRepository extends JpaRepository<Student, Integer>, JpaS
 	@Query("SELECT new Student(s.sno, s.sname, s.sage) FROM Student s WHERE s.sno = ?1")
 	List<Student> fineBySpecificColumns (int sno);
 	
+	
 }

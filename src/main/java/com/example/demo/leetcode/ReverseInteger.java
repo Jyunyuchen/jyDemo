@@ -9,9 +9,8 @@ package com.example.demo.leetcode;
 public class ReverseInteger {
 
 	public static void main(String[] args) {
-		int x = 123;
+		int x = -123;
 		System.out.println(reverse(x));
-		System.out.println(Integer.MAX_VALUE);
 	}
 
 	public static int reverse(int x) {

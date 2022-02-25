@@ -59,7 +59,6 @@ class DemoApplicationTests {
 	//調用JpaSpecificationExecutor
 	@Test
 	void contextLoads6() {
-		//System.out.println(studentRepository.findAll(StudentSpecifications.getStudentByNameLike("%明%")));
 		System.out.println(studentRepository.findAll(StudentSpecifications.getStudent("%明%", "15","台北")));
 				
 	}

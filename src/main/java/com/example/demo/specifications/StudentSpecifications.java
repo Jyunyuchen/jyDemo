@@ -37,15 +37,13 @@ public class StudentSpecifications {
 					Predicate orPredicat = criteriaBuilder.or(equalAgePredicate, likeNamePredicate);
 					predicates.add(orPredicat);
 				} else {
-					/*if (!StringUtils.isEmpty(age)) {
-						equalAgePredicate = criteriaBuilder.equal(sageColumn, age);
-						predicates.add(equalAgePredicate);
-					}
-
-					if (!StringUtils.isEmpty(name)) {
-						likeNamePredicate = criteriaBuilder.like(snameColumn, name);
-						predicates.add(likeNamePredicate);
-					}*/
+					/*
+					 * if (!StringUtils.isEmpty(age)) { equalAgePredicate =
+					 * criteriaBuilder.equal(sageColumn, age); predicates.add(equalAgePredicate); }
+					 * 
+					 * if (!StringUtils.isEmpty(name)) { likeNamePredicate =
+					 * criteriaBuilder.like(snameColumn, name); predicates.add(likeNamePredicate); }
+					 */
 				}
 
 				if (!StringUtils.isEmpty(address)) {
@@ -94,4 +92,11 @@ public class StudentSpecifications {
 			}// 實做的方法
 		};// new的物件
 	}// 方法
+
+	public static Specification<Student> lamdaSpecification(String name) {
+		return (Root<Student> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) -> {
+			Predicate predicate = null;
+			return predicate;
+		};
+	}
 }

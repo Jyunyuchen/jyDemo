@@ -3,9 +3,9 @@ package com.example.demo.exception;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(
+/*@ResponseStatus(
         value = HttpStatus.BAD_GATEWAY,
-        reason = "Requested Student Not Found")
+        reason = "Requested Student Not Found")*/
 public class StudentNotFoundException extends RuntimeException {
 
 	public StudentNotFoundException() {

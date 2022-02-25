@@ -18,6 +18,7 @@ public class LogAspect {
 	@Autowired
 	HttpServletRequest request;
 	
+	//任意返回類型 com.example.demo.controller下的任意類任意方法任意參數
 	@Pointcut("execution(* com.example.demo.controller.*.*(..))")
 	public void log() {}
 	
