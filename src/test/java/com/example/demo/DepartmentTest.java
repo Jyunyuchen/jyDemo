@@ -7,6 +7,8 @@ import java.util.Optional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.annotation.Rollback;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.Entity.Department;
 import com.example.demo.Entity.Employee;
@@ -62,6 +64,26 @@ public class DepartmentTest {
 	
 	
 	
+	@Test
+	@Rollback(false)
+	@Transactional
+	void test04() {
+		
+		// 查詢27號部門出來
+		Optional<Department> department = departmentRepository.findById(27);
+		
+		// 拿到該部門所屬的員工
+		List<Employee> employeeList = department.get().getEmployeeList();
+		
+		/*
+		 * 將員工的外鍵關聯改為null，
+		 * 加上@Transactional，會觸發hibernate執行update語句將外鍵關聯改為null
+		 */
+		for (Employee employee : employeeList) {
+			employee.setDepartment(null);
+		}
+		
+	}
 	
 	
 	

@@ -1,5 +1,7 @@
 package com.example.demo;
 
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.forwardedUrl;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -8,6 +10,7 @@ import javax.persistence.CascadeType;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.Entity.Department;
 import com.example.demo.Entity.Employee;
@@ -58,6 +61,23 @@ public class EmployeeTest {
 		  for (Employee employee : employeeList) {
 			System.out.println("============>\n" + employee + employee.getDepartment());
 		}
+	}
+	
+	@Test
+	void test04() {
+		employeeRepository.updateNameById("漂亮的---阿紫", 4);
+		
+	}
+	
+	@Test
+	void test05() {
+		Department department = new Department();
+		department.setDeptNo(1001);
+		List<Employee> employeeList = employeeRepository.findByDepartmentObject(department);
+		for(Employee employee : employeeList) {
+			System.out.println("============>\n" + employee);
+		}
+		
 	}
 	
 	
