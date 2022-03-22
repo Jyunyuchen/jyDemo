@@ -11,8 +11,8 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.ToString;
 
-@Entity
-@Table(name = "t_roles")
+/*@Entity
+@Table(name = "t_roles")*/
 public class RolesOneToOne {
 	
 	@Id

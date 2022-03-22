@@ -13,6 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "t_dept")
 public class Department {
@@ -25,7 +27,14 @@ public class Department {
 	@Column(name = "name")
 	private String name;
 	
-	@OneToMany(mappedBy = "department", fetch=FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@JsonIgnore
+	//mappedBy <-- 當前類在對方類中的屬性名稱(聲明主動放棄維護)
+	//cascade <-- 當保存Department的時候，同時保存Employee
+	@OneToMany(
+			mappedBy = "department"
+			//fetch=FetchType.EAGER
+			//cascade = CascadeType.ALL
+	)
 	private List<Employee> employeeList = new ArrayList<>();;
 
 	public Integer getDeptNo() {
@@ -54,7 +63,7 @@ public class Department {
 
 	@Override
 	public String toString() {
-		return "Department [deptNo=" + deptNo + ", name=" + name + ", employeeList=" + employeeList + "]";
+		return "Department [deptNo=" + deptNo + ", name=" + name + "]";
 	}
 	
 	

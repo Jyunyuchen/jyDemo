@@ -2,7 +2,9 @@ package com.example.demo.Repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -11,9 +13,10 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.Entity.Department;
 import com.example.demo.Entity.Employee;
+import com.example.demo.Repository.customize.EmployeeCustomerRepository;
 
 @Repository
-public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
+public interface EmployeeRepository extends JpaRepository<Employee, Integer>,JpaSpecificationExecutor<Employee>,EmployeeCustomerRepository {
 
     @Query("SELECT e FROM Employee e " +
             " LEFT JOIN e.department d " +
@@ -45,6 +48,29 @@ public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
      */
     @Query("select e from Employee e where e.department = ?1")
     List<Employee> findByDepartmentObject(@Param("department") Department department);
-
+    
+    /**
+     * 命名規則查詢
+     * @param eName
+     * @return
+     */
+    List<Employee> findByeName(String eName);
+    
+    /**
+     * 示範傳入的參數是個物件，JPQL語句中如何使用該物件
+     * @param employee
+     * @return
+     */
+    @Query("from Employee e where e.eId = :#{#employee.eId}")
+    Employee findByEmployeeObject(@Param("employee") Employee employee);
+    
+    /**
+     * JPQL語句查詢+分頁
+     * @param employee
+     * @return
+     */
+    @Query("from Employee e where e.age > :age")
+    List<Employee> findByAgePageable(@Param("age") Integer age, Pageable pageable);
+    
 }
 

@@ -169,9 +169,6 @@ public class Lambda {
 //		       .forEach(book -> System.out.println(book.getName()));
 		
 		
-		
-		
-		
 		// flatMap
 		// 可以把一個物件轉換成多個物件作為流中的元素
 		// 可將List中的List轉出來
@@ -196,21 +193,46 @@ public class Lambda {
 		// 若原author.getBooks()中為null
 		// 接著實際返回一個List<Book>是不是會多書
 		// 答案:會多書
-		List<Book> allAuthorsBooks = authors.stream()
-				//將List作者中的List書中的每本書拿取出來
-			   .flatMap(author -> {
-				   		if(author.getBooks() != null) {
-				   			return author.getBooks().stream();
-				   		}
-				   		else {
-				   			List<Book> books = new ArrayList<>();
-				   			books.add(new Book(12L, "這是新的一本書", "無", 100, "無"));
-							return books.stream();
-				   		}
-			   }).collect(Collectors.toList());
-		System.out.println(allAuthorsBooks.size());
-
+//		List<Book> allAuthorsBooks = authors.stream()
+//				//將List作者中的List書中的每本書拿取出來
+//			   .flatMap(author -> {
+//				   		if(author.getBooks() != null) {
+//				   			return author.getBooks().stream();
+//				   		}
+//				   		else {
+//				   			List<Book> books = new ArrayList<>();
+//				   			books.add(new Book(12L, "這是新的一本書", "無", 100, "無"));
+//							return books.stream();
+//				   		}
+//			   }).collect(Collectors.toList());
+//		System.out.println(allAuthorsBooks.size());
 		
+		
+		/*
+		 * 1.取的所有作者的資料(裏頭包括作者的書籍資料)
+		 * 2.使用flatMap(傳入匿名內部類)，
+		 *   將各個作者的書從list轉出來成一本一本書
+		 * 3.去除重複的書
+		 * 4.使用flatMap，將各個書的分類轉出來，
+		 *   因為分類使用逗號隔開的，用split會回傳陣列，
+		 *   必須將陣列中的分類給轉出來(stream)，所以再次用flatMap
+		 * 5.去除重複的書
+		 * 6.列印出來
+		 */
+		authors.stream()
+			   .flatMap(new Function<Author, Stream<Book>>() {
+				@Override
+				public Stream<Book> apply(Author author) {
+					
+					return author.getBooks() != null ? author.getBooks().stream() : Stream.empty(); 
+				}
+			   })
+			   .distinct()
+			   .flatMap(book -> Arrays.stream(book.getCategory().split(",")))
+			   .distinct()
+			   .forEach(book -> System.out.println(book));
+	
+
 	}
 	
 	/*

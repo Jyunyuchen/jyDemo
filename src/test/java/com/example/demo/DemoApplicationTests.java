@@ -63,4 +63,13 @@ class DemoApplicationTests {
 				
 	}
 
+	/**
+	 * 先查詢學生，再刪除
+	 */
+	@Test
+	void contextLoads7() {
+		Student student = studentRepository.findOneBySno(1);
+		System.out.println("=============>\n" + student);
+		studentRepository.delete(student);
+	}
 }

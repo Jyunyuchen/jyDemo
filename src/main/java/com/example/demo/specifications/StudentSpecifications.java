@@ -18,6 +18,12 @@ import com.example.demo.Entity.Student;
 public class StudentSpecifications {
 
 	public static Specification<Student> getStudent(String name, String age, String address) {
+		
+		/**
+		 * root:代表實體物件，用它獲取屬性值
+		 * CriteriaQuery:用於生成SQL語句
+		 * criteriaBuilder:用於拼接查詢條件
+		 */
 		return new Specification<Student>() {
 			@Override
 			public Predicate toPredicate(Root<Student> root, CriteriaQuery<?> query, CriteriaBuilder criteriaBuilder) {
@@ -58,7 +64,7 @@ public class StudentSpecifications {
 				Order orderByAge = criteriaBuilder.desc(sageColumn);
 
 				likeEqualPredicate = query.where(p).orderBy(orderByAge).getRestriction();
-
+				
 				return likeEqualPredicate;
 			}// 實做的方法
 		};// new的物件

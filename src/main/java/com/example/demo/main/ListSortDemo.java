@@ -22,6 +22,30 @@ public class ListSortDemo {
 		});
 		
 		System.out.println("排序後:" + list);
+		
+		
+
+		
+		System.out.println();
+		
+		
+		// lambda寫法
+		ArrayList<Integer> integerList = new ArrayList<>();
+		integerList.add(3);
+		integerList.add(1);
+		integerList.add(2);
+
+		System.out.println("排序前:" + integerList);
+		
+		Collections.sort(integerList , 
+				         (i1, i2) -> i1.compareTo(i2));
+		
+		
+		System.out.println("排序後:" + integerList);
+		
+		
+		
+	
 	}
 
 }

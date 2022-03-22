@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -24,6 +25,27 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 public class thymeleafController {
+	
+	
+	@GetMapping("/get-session")
+	@ResponseBody
+	public String getSession(HttpSession httpSession) {
+		return httpSession.getAttribute("sessionTOKEN") != null ?
+			   (String) httpSession.getAttribute("sessionTOKEN") : "Cookies錯誤";
+	}
+	
+	/**
+	 * 在銀行開了一個帳戶(Session)存放鍵值對「"sessionTOKEN"/"session測試是否會在瀏覽器產生一個Token"」
+	 * 並把提款卡給了用戶(將JSESSIONID寫到Cookies)
+	 * 在「getSession」方法，請求訪問這個getSession方法時，會攜帶JSESSIONID，
+	 * servlet驗證此JSESSIONID是否能查到鍵值對，可以的話返回值回去
+	 * @param httpSession
+	 */
+	@GetMapping("/save-session")
+	@ResponseBody
+	public void saveSession(HttpSession httpSession) {
+		httpSession.setAttribute("sessionTOKEN","session測試是否會在瀏覽器產生一個Token");
+	}
 	
 	@GetMapping("/status_code")
 	@ResponseBody

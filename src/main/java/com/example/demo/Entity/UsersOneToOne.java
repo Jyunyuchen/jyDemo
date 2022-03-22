@@ -13,8 +13,8 @@ import javax.persistence.Table;
 import lombok.Data;
 import lombok.ToString;
 
-@Entity
-@Table(name = "t_users")
+/*@Entity
+@Table(name = "t_users")*/
 public class UsersOneToOne {
 	
 	@Id

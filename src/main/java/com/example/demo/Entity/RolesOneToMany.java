@@ -20,8 +20,8 @@ import lombok.ToString;
  * @author jy
  *
  */
-@Entity
-@Table(name = "t_roles_one_to_many")
+/*@Entity
+@Table(name = "t_roles_one_to_many")*/
 public class RolesOneToMany {
 	
 	@Id
