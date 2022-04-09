@@ -31,5 +31,12 @@ public interface DepartmentRepository extends JpaRepository<Department, Integer>
     		+ " FROM Department d " +
             " INNER JOIN d.employeeList e ")
     List<DeptJoinEmpResponse> getJoinInformation();
-	
+    
+    /**
+     * 查詢某部門底下有哪些員工(LEFT OUTER JOIN)
+     * 使用FETCH飢餓抓取
+     */
+    @Query("FROM Department d LEFT OUTER JOIN FETCH"
+           + " d.employeeList WHERE d.deptNo = ?1")
+    Department getLeftOuterJoinInformation(Integer no);
 }
