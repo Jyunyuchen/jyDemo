@@ -102,7 +102,7 @@ public class thymeleafController {
 	}*/
 	
 	//加入@ResponseBody告訴spring要回傳字串不是重定向視圖(頁面跳轉)
-	@GetMapping("/hello1")
+	/*@GetMapping("/hello1")
 	@ResponseBody
     public String hello1() {
 		return "Hello!!";
@@ -114,5 +114,5 @@ public class thymeleafController {
             Model model) {
         model.addAttribute("name", name); // set request attribute with key "name"
         return "hello"; // forward to hello.html
-    }
+    }*/
 }
