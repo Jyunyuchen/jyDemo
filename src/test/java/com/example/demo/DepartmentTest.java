@@ -150,4 +150,18 @@ public class DepartmentTest {
 		System.out.println("=========> " + joinInformation);
 	
 	}
+	
+	/**
+     * 查詢某部門底下有哪些員工(LEFT OUTER JOIN)
+     * 因department屬於一的一方，預設抓取策略是懶加載
+     * 這裡使用FETCH飢餓抓取
+     */
+	@Test
+	void test09() {
+		Department department = departmentRepository.getLeftOuterJoinInformation(1001);
+		System.out.println("=========> " + department);
+		System.out.println("=========> " + department.getEmployeeList());
+	
+		
+	}
 }

@@ -230,4 +230,40 @@ public class EmployeeTest {
 		System.out.println(employees);
 		
 	}
+	
+	/**
+	 * 保存一名員工後立即取得id
+	 */
+	@Test
+	void test16() {
+
+		//先取得持久化狀態的部門
+		Optional<Department> deptOptional = departmentRepository.findById(1001);
+		
+		//新增一名員工(瞬時狀態)
+		Employee employee = new Employee();
+		employee.setAge(25);
+		employee.setEName("保存一名員工後立即取得id");
+		employee.setDepartment(deptOptional.get());
+		
+		//保存員工(持久化狀態)
+		employeeRepository.save(employee);
+		
+		//立即取得ID
+		System.out.println("剛保存的員工ID===> " + employee.getEId());
+		
+	}
+	
+	/**
+	 * 刪除游離物件的員工
+	 */
+	@Test
+	void test17() {
+		//新增一個游離物件
+		Employee employee = new Employee();
+		employee.setEId(51);
+		
+		//執行刪除
+		employeeRepository.delete(employee);
+	}
 }
