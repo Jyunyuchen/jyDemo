@@ -7,6 +7,8 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @EnableWebSecurity //Enable springFliterChain
 @Configuration
@@ -22,13 +24,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		httpSecurity
 				.cors().and().csrf().disable()
 				.authorizeRequests()
-				.antMatchers("/login").permitAll()
+				.antMatchers("/jyLogin").permitAll()
 				.anyRequest().authenticated();
 	}
 
-	/*@Bean
+	@Bean
+	public PasswordEncoder passwordEncoder(){
+		return new BCryptPasswordEncoder();
+	}
+
+	@Bean
 	@Override
 	public AuthenticationManager authenticationManagerBean() throws Exception {
 		return super.authenticationManagerBean();
-	}*/
+	}
 }

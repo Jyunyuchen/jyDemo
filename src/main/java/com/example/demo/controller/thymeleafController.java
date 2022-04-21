@@ -72,14 +72,6 @@ public class thymeleafController {
 		return list;
 	}
 	
-	//傳入的參數封裝成物件(POJO)
-	@GetMapping("/hello4")
-	@ResponseBody
-    public User hello4(User user) {
-		return user;
-	}
-		
-	
 	//Spring Boot自帶JacksonHttpMessageConvertersConfiguration,
 	//可將物件以json形式返回
 	/*@GetMapping("/hello3")
