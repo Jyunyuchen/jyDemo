@@ -48,7 +48,7 @@ public class Lambda {
 //		});
 //		System.out.println(num+1);
 //		
-		Integer num = typeConver(str -> Integer.valueOf(str));
+		//Integer num = typeConver(str -> Integer.valueOf(str));
 		//System.out.println(num + 1);
 
 //------------------------------------------------------------
@@ -230,7 +230,7 @@ public class Lambda {
 			   .distinct()
 			   .flatMap(book -> Arrays.stream(book.getCategory().split(",")))
 			   .distinct()
-			   .forEach(book -> System.out.println(book));
+			   .forEach(category -> System.out.println(category));
 	
 
 	}

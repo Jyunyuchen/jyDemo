@@ -10,7 +10,7 @@ public class RegexDemo {
 		//boolean b = num.matches("\\d+");
 		//必須是個數字且出現一次或多次
 		boolean b = num.matches("\\d+");
-		System.out.println(b);		
+		//System.out.println(b);		
 		
 		
 		
@@ -23,7 +23,7 @@ public class RegexDemo {
 		 * 「{8}」===>代表必須要有8位數
 		 */
 		b = phoneNumber.matches("(09|08)\\d{8}");
-		System.out.println(b);
+		//System.out.println(b);
 		
 		/*
 		 * 校驗電子郵件
@@ -34,7 +34,9 @@ public class RegexDemo {
 		 * 「{1,}」代表至少1位
 		 * 「(\\.\\w{2,}){12}」代表後面的".com"至少出現一次最多兩次用"()"括起來
 		 */
-		b = email.matches("\\w{1,}@\\w{2,}(\\.\\w{2,}){1,2}");
+		//b = email.matches("\\w{1,}@\\w{2,}(\\.\\w{2,}){1,2}");
+		b = email.matches("\\w{1,}");
+		
 		System.out.println(b);
 		
 		
