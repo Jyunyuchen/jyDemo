@@ -2,10 +2,14 @@ package com.example.demo.service.impl;
 
 import com.example.demo.DTO.UserResponseVO;
 import com.example.demo.service.LoginService;
+import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
@@ -25,12 +29,23 @@ public class LoginSerivceImpl implements LoginService {
         // 使用實現類UsernamePasswordAuthenticationToken傳入
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
                 new UsernamePasswordAuthenticationToken(user.getUserName(), user.getPassword());
-        Authentication authenticate = authenticationManagerBean.authenticate(usernamePasswordAuthenticationToken);
 
-        // 如果authenticate為null表示驗證沒通過
-        if(Objects.isNull(authenticate)){
-            throw new RuntimeException("登入失敗");
+        Authentication authenticate = null;
+        try {
+            authenticate = authenticationManagerBean.authenticate(usernamePasswordAuthenticationToken);
+        } catch (AuthenticationException e) {
+            // 驗證不通過會拋異常
+           // System.out.println("====>" + ReflectionToStringBuilder.toString(authenticate, ToStringStyle.MULTI_LINE_STYLE));
+            System.out.println("==========>"+e.getMessage());
+            e.printStackTrace();
+            System.out.println("==========>" + "登入失敗");
         }
+//
+//        SecurityContextHolder.getContext().setAuthentication(authenticate);
+//
+//        Authentication authenticationFromContext = SecurityContextHolder.getContext().getAuthentication();
+//
+//        System.out.println(ReflectionToStringBuilder.toString(authenticationFromContext, ToStringStyle.MULTI_LINE_STYLE));
 
         //如果認證沒通過，給出對應的提示
 
