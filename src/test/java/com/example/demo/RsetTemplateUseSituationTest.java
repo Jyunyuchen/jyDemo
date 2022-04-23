@@ -24,6 +24,7 @@ public class RsetTemplateUseSituationTest {
 
     @Autowired
     public RsetTemplateUseSituationTest(RestTemplateBuilder builder) {
+
         this.restTemplate = builder.build();
     }
 
@@ -113,5 +114,16 @@ public class RsetTemplateUseSituationTest {
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+
+    @Test
+    void test04(){
+        System.out.println("目前的Proxy Host:" + System.getProperty("http.proxyHost"));
+        System.out.println("目前的Proxy Port:" + System.getProperty("http.proxyPort"));
+
+        String myIpUrl = "https://myip.briian.com/";
+        ResponseEntity<String> response = restTemplate.exchange(myIpUrl,
+                HttpMethod.GET, null, String.class);
+        System.out.println("==============>" + response.getBody());
     }
 }
