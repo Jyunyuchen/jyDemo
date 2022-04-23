@@ -20,11 +20,13 @@ import java.net.URI;
 @SpringBootTest
 public class RsetTemplateUseSituationTest {
 
+
     private RestTemplate restTemplate;
 
     @Autowired
     public RsetTemplateUseSituationTest(RestTemplateBuilder builder) {
-
+        //Spring在注入RestTemplateBuilder的時候
+        //應該會將我們寫的的ProxyCustomizer當作建構子的參數傳進去new出RestTemplateBuilder
         this.restTemplate = builder.build();
     }
 
