@@ -25,6 +25,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 				.cors().and().csrf().disable()
 				.authorizeRequests()
 				.antMatchers("/jyLogin").permitAll()
+				.antMatchers("/asyncTest").permitAll()
 				.anyRequest().authenticated();
 	}
 
