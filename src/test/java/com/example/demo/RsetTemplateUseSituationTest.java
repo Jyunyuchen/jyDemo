@@ -20,10 +20,13 @@ import java.net.URI;
 @SpringBootTest
 public class RsetTemplateUseSituationTest {
 
+
     private RestTemplate restTemplate;
 
     @Autowired
     public RsetTemplateUseSituationTest(RestTemplateBuilder builder) {
+        //Spring在注入RestTemplateBuilder的時候
+        //應該會將我們寫的的ProxyCustomizer當作建構子的參數傳進去new出RestTemplateBuilder
         this.restTemplate = builder.build();
     }
 
@@ -113,5 +116,16 @@ public class RsetTemplateUseSituationTest {
         } catch (Exception e) {
             System.out.println(e);
         }
+    }
+
+    @Test
+    void test04(){
+        System.out.println("目前的Proxy Host:" + System.getProperty("http.proxyHost"));
+        System.out.println("目前的Proxy Port:" + System.getProperty("http.proxyPort"));
+
+        String myIpUrl = "https://myip.briian.com/";
+        ResponseEntity<String> response = restTemplate.exchange(myIpUrl,
+                HttpMethod.GET, null, String.class);
+        System.out.println("==============>" + response.getBody());
     }
 }
