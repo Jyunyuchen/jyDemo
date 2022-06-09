@@ -37,9 +37,26 @@ public class RegexDemo {
 		//b = email.matches("\\w{1,}@\\w{2,}(\\.\\w{2,}){1,2}");
 		b = email.matches("\\w{1,}");
 		
-		System.out.println(b);
+		//System.out.println(b);
+
+		validateIp();
+
 		
-		
+	}
+
+	/*
+	    驗證是否是IP
+	 */
+	public static void validateIp(){
+
+		String ip01 = "11.234.56.12";
+		String ip02 = "10.31.89.172";
+
+		String str = "240.3.21.";
+		String ipRegex = "(([1-9]?\\d|1\\d{2}|2[0-4]\\d|25[0-5])\\.){3}([1-9]?\\d|1\\d{2}|2[0-4]\\d|25[0-5])";
+
+		System.out.println("---->" + ip02.matches(ipRegex));
+
 	}
 
 }

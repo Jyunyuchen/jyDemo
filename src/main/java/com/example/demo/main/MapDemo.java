@@ -10,7 +10,18 @@ public class MapDemo {
 	public static void main(String[] args) {
 		//practise01();
 		//practise02();
-		practise03();
+		//practise03();
+		practise04();
+	}
+
+	/**
+	 * 取一個不存在的key會發生什麼事
+	 */
+	private static void practise04() {
+		Map<String, String> map = new HashMap<>();
+		map.put("TestKey","TestValue");
+		String dwqdwq = map.get("dwqdwq");
+		System.out.println(dwqdwq);
 	}
 
 	/*
