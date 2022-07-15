@@ -66,7 +66,7 @@ public class ManyToManyTest {
 	@Test
 	void test02() {
 		
-		Optional<Article> optionalArticle = articleRepository.findById(5);
+		Optional<Article> optionalArticle = articleRepository.findById(2);
 		System.out.println("文章信息====>" + optionalArticle.get() + "\n");
 		/*
 		 * 要級聯獲取type資料的話，

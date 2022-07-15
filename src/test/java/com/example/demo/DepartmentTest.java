@@ -52,21 +52,27 @@ public class DepartmentTest {
 	void test03() {
 		
 		Department department = new Department();
-		department.setName("人事部");
+		department.setName("行銷部");
 		
-		Employee employee = new Employee();
-		employee.setEName("李四");
-		employee.setAge(52);
+		Employee employee1 = new Employee();
+		employee1.setEName("張無忌");
+		employee1.setAge(22);
 		
 		Employee employee2 = new Employee();
-		employee2.setEName("王五");
-		employee2.setAge(12);
-		
-		department.getEmployeeList().add(employee);
+		employee2.setEName("周芷若");
+		employee2.setAge(22);
+
+		Employee employee3 = new Employee();
+		employee3.setEName("金大一");
+		employee3.setAge(34);
+
+		department.getEmployeeList().add(employee1);
 		department.getEmployeeList().add(employee2);
-		employee.setDepartment(department);
+		department.getEmployeeList().add(employee3);
+		employee1.setDepartment(department);
 		employee2.setDepartment(department);
-		
+		employee3.setDepartment(department);
+
 		departmentRepository.save(department);
 	}
 	

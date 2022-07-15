@@ -31,9 +31,9 @@ public class Department {
 	//mappedBy <-- 當前類在對方類中的屬性名稱(聲明主動放棄維護)
 	//cascade <-- 當保存Department的時候，同時保存Employee
 	@OneToMany(
-			mappedBy = "department"
+			mappedBy = "department",
 			//fetch=FetchType.EAGER
-			//cascade = CascadeType.ALL
+			cascade = CascadeType.ALL
 	)
 	private List<Employee> employeeList = new ArrayList<>();;
 

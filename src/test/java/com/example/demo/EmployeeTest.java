@@ -12,10 +12,7 @@ import javax.persistence.ManyToOne;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.data.domain.Sort.Order;
 import org.springframework.test.annotation.Rollback;
 import org.springframework.transaction.annotation.Transactional;
@@ -238,12 +235,12 @@ public class EmployeeTest {
 	void test16() {
 
 		//先取得持久化狀態的部門
-		Optional<Department> deptOptional = departmentRepository.findById(1001);
+		Optional<Department> deptOptional = departmentRepository.findById(4);
 		
 		//新增一名員工(瞬時狀態)
 		Employee employee = new Employee();
 		employee.setAge(25);
-		employee.setEName("保存一名員工後立即取得id");
+		employee.setEName("行銷達人");
 		employee.setDepartment(deptOptional.get());
 		
 		//保存員工(持久化狀態)
@@ -261,9 +258,40 @@ public class EmployeeTest {
 	void test17() {
 		//新增一個游離物件
 		Employee employee = new Employee();
-		employee.setEId(51);
+		employee.setEId(6);
 		
 		//執行刪除
 		employeeRepository.delete(employee);
 	}
+
+	/**
+	 * 使用Example查詢
+	 * 1.EmployeeRepository先繼承QueryByExampleExecutor<Employee>
+	 * 2.根據flag(true或false)模擬前端的動態條件，查詢名字"Ab"開頭的員工
+	 */
+	@Test
+	void test18() {
+
+		boolean dynamicConditionsFlag = true;
+
+		ExampleMatcher matcher = ExampleMatcher.matching();
+
+		//新增一個游離物件
+		Employee employee = new Employee();
+		employee.setEName("Ab");
+
+		// 如果條件成立，查詢姓名"Ab"開頭的員工
+		if(dynamicConditionsFlag){
+			matcher = matcher.withMatcher("eName", m -> m.startsWith());
+		}
+
+		Example example = Example.of(employee, matcher);
+
+		List<Employee> employeeList = employeeRepository.findAll(example);
+
+		System.out.println("-----------------------------------");
+		System.out.println(employeeList);
+		System.out.println("-----------------------------------");
+	}
+
 }
